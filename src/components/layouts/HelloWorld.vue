@@ -15,6 +15,10 @@ defineProps({
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
+    <div>
+      <label for="question">How are you feeling today:  </label>
+      <input type="text" v-model="question" id="question">
+    </div>
   </div>
 </template>
 
