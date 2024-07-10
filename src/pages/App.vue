@@ -13,7 +13,7 @@ import TheHeader from "@/components/layouts/TheHeader.vue";
     <img alt="Vue logo" class="logo" src="../assets/logo.svg" width="50" height="50" />
 
     <div class="wrapper">
-      <HelloWorld msg="Can you hear the music" />
+      <HelloWorld/>
     </div>
   </main>
 </template>

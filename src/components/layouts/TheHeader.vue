@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <h1>Can you hear the music</h1>
+  <h1>Mood and Songs</h1>
 </template>
 
 <style scoped>
