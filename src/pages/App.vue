@@ -1,6 +1,6 @@
 <script setup>
 import HelloWorld from '../components/layouts/HelloWorld.vue'
-import TheWelcome from '../components/layouts/TheWelcome.vue'
+/**import TheWelcome from '../components/layouts/TheWelcome.vue'**/
 import TheHeader from "@/components/layouts/TheHeader.vue";
 </script>
 
@@ -13,7 +13,7 @@ import TheHeader from "@/components/layouts/TheHeader.vue";
     <img alt="Vue logo" class="logo" src="../assets/logo.svg" width="50" height="50" />
 
     <div class="wrapper">
-      <HelloWorld/>
+      <HelloWorld></HelloWorld>
     </div>
   </main>
 </template>
@@ -43,12 +43,6 @@ header h1 {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
   }
 }
 </style>

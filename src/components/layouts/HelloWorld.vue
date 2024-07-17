@@ -1,12 +1,14 @@
 <script setup>
 import { ref } from 'vue';
 
-defineProps({
-  msg: {
-    type: String,
-    required: true
-  }
-})
+//make page unscrollable
+const isPageLocked = ref(true);
+const toggleScroll = () => {
+  isPageLocked.value = !isPageLocked.value;
+
+  // Disable or enable scrolling based on isPageLocked value
+  document.body.style.overflow = isPageLocked.value ? 'hidden' : 'auto';
+};
 
 const mood = ref('');
 const question = ref('');
@@ -23,38 +25,40 @@ const moodOptions = [
 </script>
 
 <template>
-  <div class="page-container">
-    <div class="greetings">
-      <div>
-        <label class="question-label">How are you feeling today:  </label>
-        <div class="mood_options">
-          <div v-for="option in moodOptions" :key="option.value" class="mood_option">
-            <label :for="option.value" class="option-label">{{ option.text }}</label>
-            <input type="radio" :id="option.value" v-model="mood" :value="option.value">
-            <div class="circle"></div>
+  <div :class="{ 'no-scroll': isPageLocked }">
+    <div class="page-container">
+      <div class="greetings">
+        <div>
+          <label class="question-label">How are you feeling today:  </label>
+          <div class="mood_options">
+            <div v-for="option in moodOptions" :key="option.value" class="mood_option">
+              <label :for="option.value" class="option-label">{{ option.text }}</label>
+              <input type="radio" :id="option.value" v-model="mood" :value="option.value">
+              <div class="circle"></div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="favourite-song">
-        <label for="question" class="question-label">What is your favourite song of all time:  </label>
-        <input type="text" v-model="question" id="question" class="small-input">
-      </div>
-      <div class="me">
-        <label class="question-label">Would you like to try what I like: </label>
-        <div>
-          <label for="yes" class="option-label">Yes</label>
-          <input type="radio" id="yes" v-model="myTastes" value="yes">
-          <label for="no" class="option-label">No</label>
-          <input type="radio" id="no" v-model="myTastes" value="no">
+        <div class="favourite-song">
+          <label for="question" class="question-label">What is your favourite song of all time:  </label>
+          <input type="text" v-model="question" id="question" class="small-input">
         </div>
-      </div>
-      <div class="lyrics-or-not">
-        <label class="question-label">Lyrics or Instrumental: </label>
-        <div>
-          <label for="lyrics" class="option-label">Lyrics</label>
-          <input type="radio" id="lyrics" v-model="lyricsOrNot" value="lyrics">
-          <label for="instrumental" class="option-label">Instrumental</label>
-          <input type="radio" id="instrumental" v-model="lyricsOrNot" value="instrumental">
+        <div class="me">
+          <label class="question-label">Would you like to try what I like: </label>
+          <div>
+            <label for="yes" class="option-label">Yes</label>
+            <input type="radio" id="yes" v-model="myTastes" value="yes">
+            <label for="no" class="option-label">No</label>
+            <input type="radio" id="no" v-model="myTastes" value="no">
+          </div>
+        </div>
+        <div class="lyrics-or-not">
+          <label class="question-label">Lyrics or Instrumental: </label>
+          <div>
+            <label for="lyrics" class="option-label">Lyrics</label>
+            <input type="radio" id="lyrics" v-model="lyricsOrNot" value="lyrics">
+            <label for="instrumental" class="option-label">Instrumental</label>
+            <input type="radio" id="instrumental" v-model="lyricsOrNot" value="instrumental">
+          </div>
         </div>
       </div>
     </div>
@@ -62,11 +66,16 @@ const moodOptions = [
 </template>
 
 <style scoped>
+.no-scroll {
+  overflow: hidden;
+}
+
 .page-container {
   display: flex;
   justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  align-items: flex-start; /* Center vertically */
   height: 100vh; /* Full viewport height */
+  margin-top: 80px;
 }
 
 .greetings {
@@ -124,7 +133,7 @@ const moodOptions = [
   margin-right: 10px;
 }
 .me input[type="radio"] {
-  margin-left: 5px;
+  margin-right: 10px;
 }
 
 /** css for lyrics or not **/
@@ -135,7 +144,7 @@ const moodOptions = [
   margin-right: 10px;
 }
 .lyrics-or-not input[type="radio"] {
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 h3 {
